@@ -1,0 +1,99 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmls="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Plataforma</title>
+  <!-- CSS Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Estilo personalizado -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+      transition: background-color 0.5s ease;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 100px auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    .dark-mode-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 999;
+    }
+
+    /* Estilos para o tema escuro */
+    body.dark-mode {
+      background-color: #343a40;
+      color: #ffffff;
+    }
+
+    body.dark-mode .form-control,
+    body.dark-mode .custom-control-label {
+      background-color: #2b2f33;
+      color: #ffffff;
+    }
+
+    body.dark-mode .btn-primary {
+      background-color: #5a86e7;
+      border-color: #5a86e7;
+    }
+
+    body.dark-mode .btn-primary:hover {
+      background-color: #4f7be5;
+      border-color: #4f7be5;
+    }
+  </style>
+</head>
+<body>
+  <div class="dark-mode-toggle">
+    <div class="custom-control custom-switch">
+      <input type="checkbox" class="custom-control-input" id="themeSwitch">
+      <label class="custom-control-label" for="themeSwitch">Ativar modo escuro</label>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Editar Plataforma</h2>
+    <form th:object="${plataforma}" th:action="@{/criarPlataforma}" method="POST">
+      <input type="hidden" th:field="*{idPlataforma}">
+      <div class="form-group">
+        <label>Nome</label>
+        <input type="text" class="form-control" th:field="*{nome}" placeholder="Digite o nome do plataforma">
+      </div>
+      <button type="submit" class="btn btn-primary">Editar</button>
+      <button type="button" class="btn btn-secondary" onclick="window.history.back()">Voltar</button>
+    </form>
+  </div>
+
+  <!-- Scripts Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Script personalizado -->
+  <script>
+    const themeSwitch = document.querySelector("#themeSwitch");
+
+    themeSwitch.addEventListener("change", function() {
+      document.body.classList.toggle("dark-mode");
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmls="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Categorias</title>
+  <!-- CSS Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Estilo personalizado -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+      transition: background-color 0.5s ease;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 100px auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table th,
+    table td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    table th {
+      background-color: #f8f9fa;
+      font-weight: bold;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    table td {
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    .dark-mode-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 999;
+    }
+
+    /* Estilos para o tema escuro */
+    body.dark-mode {
+      background-color: #343a40;
+      color: #ffffff;
+    }
+
+    body.dark-mode table th,
+    body.dark-mode table td {
+      border-color: #2b2f33;
+    }
+
+    body.dark-mode table th {
+      background-color: #2b2f33;
+    }
+
+    body.dark-mode table td:last-child {
+      border-color: #2b2f33;
+    }
+  </style>
+</head>
+<body>
+  <div class="dark-mode-toggle">
+    <div class="custom-control custom-switch">
+      <input type="checkbox" class="custom-control-input" id="themeSwitch">
+      <label class="custom-control-label" for="themeSwitch">Ativar modo escuro</label>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Lista de Categorias</h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="categoria : ${categorias}">
+          <td th:text="${categoria.nome}">Nome</td>
+          <td>
+            <a th:href="@{editarCategoria/{id}/(id=${categoria.idCategoria})}" class="btn btn-primary">Editar</a>
+            <a th:href="@{excluirCategoria/{id}/(id=${categoria.idCategoria})}" class="btn btn-danger">Excluir</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="text-center mt-4">
+      <a href="/addCategoria" class="btn btn-primary">Adicionar Categoria</a>
+      <a href="/usuarios/menuPrincipal" class="btn btn-primary">Voltar</a>
+    </div>
+  </div>
+
+  <!-- Scripts Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Script personalizado -->
+  <script>
+    const themeSwitch = document.querySelector("#themeSwitch");
+
+    themeSwitch.addEventListener("change", function() {
+      document.body.classList.toggle("dark-mode");
+    });
+  </script>
+</body>
+</html>
